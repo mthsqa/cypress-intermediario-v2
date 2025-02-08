@@ -1,8 +1,7 @@
 Cypress.Commands.add('login', (
   user = Cypress.env('user_name'),
   password = Cypress.env('user_password'),
-  { cacheSession = true } = {},
-) => {
+  { cacheSession = true } = {},) => {
   const login = () => {
     cy.visit('/users/sign_in')
 
@@ -27,7 +26,7 @@ Cypress.Commands.add('login', (
   } else {
     login()
   }
-})
+  })
 
 
   Cypress.Commands.add('logout', () => {
@@ -53,4 +52,13 @@ Cypress.Commands.add('login', (
     cy.contains('Submit issue').click()
   })
   
+  Cypress.Commands.add('gui_setLabelOnIssue', label => {
+    cy.get('.qa-edit-link-labels').click()
+    cy.contains(label.name).click()
+    cy.get('body').click()
+  })
   
+  Cypress.Commands.add('gui_setMilestoneOnIssue', milestone => {
+    cy.get('.block.milestone .edit-link').click()
+    cy.contains(milestone.title).click()
+  })
